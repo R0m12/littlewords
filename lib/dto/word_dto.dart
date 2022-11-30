@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'word_dto.g.dart';
-
+//test
 @JsonSerializable()
 class WordDTO{
   WordDTO(this.uid, this.author, this.content, this.latitude, this.longitude);
