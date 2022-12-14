@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:littlewords/home/home_view.dart';
 import 'package:littlewords/home/login_screen.dart';
+import 'package:littlewords/home/liste_mots.dart';
 
 import 'home/splash_screen.dart';
 
