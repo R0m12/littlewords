@@ -17,4 +17,5 @@ class WordDTO{
   factory WordDTO.fromJson(Map<String, dynamic> json) => _$WordDTOFromJson(json);
 
   static fromResultSet(Map<String, dynamic> map) => WordDTO.fromJson(map)
+//test
 }
