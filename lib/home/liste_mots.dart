@@ -8,14 +8,14 @@ class ListeMots extends StatelessWidget {
     return Column(
       children: [
         Wrap(
-          //children: [
-
-          //],
+          children: [
+            ElevatedButton(onPressed: (){
+              Navigator.pop(context);
+            }, child: Text('Déposer')),
+            ElevatedButton(onPressed: (){},
+                child: Text('Supprimer'))
+          ],
         ),
-
-        ElevatedButton(onPressed: (){
-          Navigator.pop(context);
-        }, child: Text('Fermer')),
       ],
     );
   }
