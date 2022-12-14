@@ -14,6 +14,8 @@ class LoginScreen extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool textFieldError = false;
+
 
   @override
   Widget build(BuildContext context){
@@ -29,17 +31,19 @@ class _MyStatefulWidgetState extends State<LoginScreen> {
             contentPadding: EdgeInsets.zero,
           ),
             textAlign: TextAlign.center,
-            validator: (String? value){
-              if(value == null || value.isEmpty){
-                return "Veuillez choisir un nom.";
-              }
+            validator: (String? text){
+                setState(() {
+                textFieldError = text == null || text.isEmpty;
+                debugPrint('Error: $textFieldError');
+                });
               return null;
-            },
-            style: const TextStyle(
+              },
+              style: const TextStyle(
               color: Colors.black,
             )
           ),
         ),
+        textFieldError? const Text('Veuillez saisir un nom', style: TextStyle(color: Colors.red), textAlign: TextAlign.center,) : const SizedBox(),
         Center(
           child: Padding(padding: const EdgeInsets.symmetric(vertical: 16.0), child: ElevatedButton(
             onPressed: () {
