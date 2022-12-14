@@ -21,8 +21,8 @@ class LittleWordsMap extends StatelessWidget {
       ),
       children: [
         TileLayer(
-          urlTemplate: 'https://',
-          userAgentPackageName: ''
+          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          userAgentPackageName: 'dev.fleaflet.flutter_map.example'
         ),
 
         //TODO: Ajouter un marker pour indiquer la position de l'utilisateur
