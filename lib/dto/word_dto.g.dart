@@ -7,11 +7,11 @@ part of 'word_dto.dart';
 // **************************************************************************
 
 WordDTO _$WordDTOFromJson(Map<String, dynamic> json) => WordDTO(
-      json['uid'] as int?,
+      json['uid'] as int,
       json['author'] as String?,
       json['content'] as String?,
-      json['latitude'] as String?,
-      json['longitude'] as String?,
+      json['latitude'] as double,
+      json['longitude'] as double,
     );
 
 Map<String, dynamic> _$WordDTOToJson(WordDTO instance) => <String, dynamic>{
