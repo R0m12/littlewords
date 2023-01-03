@@ -13,7 +13,6 @@ class ListeMots extends StatelessWidget {
         Wrap(
           children: [
             IconButton(onPressed: (){
-              //TODO: Supprimer le mot de la base de données
                 print("SUPPRIME");
               },
               icon: Icon(Icons.delete_forever),
