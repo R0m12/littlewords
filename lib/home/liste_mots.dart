@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:littlewords/db/db_helper.dart';
+import 'package:littlewords/dto/word_dto.dart';
 
 class ListeMots extends StatelessWidget {
   const ListeMots({Key? key}): super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Future<List<WordDTO>> listeDeMesMots = DbHelper.instance.getAllWords();
     return Scaffold(
+      appBar: AppBar(
+        title: Image.asset('assets/images/logo-no-background.png', height: 60),
+      ),
+      backgroundColor: Colors.cyanAccent,
       body: Center(
         child: (
           Column(
@@ -28,11 +35,13 @@ class ListeMots extends StatelessWidget {
                   },
                     icon: Icon(Icons.undo),
                   ),
-                  ElevatedButton(onPressed: (){
-                    Navigator.pop(context);
-                  }, child: Text('Retour à la carte')),
+
                 ],
               ),
+              //Bouton permettant de revenir à la map
+              ElevatedButton(onPressed: (){
+                Navigator.pop(context);
+              }, child: Text('Retour à la carte')),
             ],
           )
         ),
