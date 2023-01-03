@@ -30,9 +30,7 @@ class ListeMots extends StatelessWidget {
                   ),
                   ElevatedButton(onPressed: (){
                     Navigator.pop(context);
-                  }, child: Text('Déposer')),
-                  ElevatedButton(onPressed: (){},
-                      child: Text('Supprimer'))
+                  }, child: Text('Retour à la carte')),
                 ],
               ),
             ],
