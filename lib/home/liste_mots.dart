@@ -13,7 +13,7 @@ class ListeMots extends StatelessWidget {
       appBar: AppBar(
         title: Image.asset('assets/images/logo-no-background.png', height: 60),
       ),
-      backgroundColor: Colors.cyanAccent,
+      backgroundColor: Colors.cyanAccent[100],
       body: Center(
         child: (
           Column(
