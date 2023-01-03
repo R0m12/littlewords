@@ -39,19 +39,22 @@ class DbHelper{
     const String createWordsTableQuery = 'CREATE TABLE words (uid integer PRIMARY KEY AUTOINCREMENT, content VARCHAR(200) NOT NULL)';
     db.execute(createWordsTableQuery);
   }
+
   ///Déclenché lorsque le numéro de version est augmenté
   FutureOr<void> _onUpgrade(Database db, int oldVersion, int newVersion){
     const String dropWordsTableQuery = 'DROP TABLE IF EXISTS words';
     db.execute(dropWordsTableQuery);
   }
 
-
+  /// Insertion d'un mot dans la base de données
   Future<void> insert(final WordDTO wordDTO) async {
     Database db = await instance.database;
-    final String insertWord = "INSERT into words (content) values ('${wordDTO.content}') ";
+    final String insertWord = "INSERT into words (content, author, latitude, longitude) values ('${wordDTO.content}',"
+        "'${wordDTO.author}', '${wordDTO.latitude}', '${wordDTO.longitude}') ";
     return db.execute(insertWord);
   }
 
+  /// Récupération de tous les mots de la base de données
   Future<List<WordDTO>> getAllWords() async {
     final Database db = await instance.database;
 
@@ -63,16 +66,14 @@ class DbHelper{
       var word = WordDTO.fromResultSet(r);
       results.add(word);
     }
-
     return Future.value(results);
   }
 
+  /// Récupére le nombre de mots présents dans la table
   Future<int> countWords() async {
     final Database db = await instance.database;
     var res = await db.rawQuery("Select count(*) from words");
     var count = Sqflite.firstIntValue(res);
     return Future.value(count);
   }
-
-  //test
 }
