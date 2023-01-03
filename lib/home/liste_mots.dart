@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:littlewords/db/dbHelper.dart';
 
 class ListeMots extends StatelessWidget {
   const ListeMots({Key? key}): super(key: key);
