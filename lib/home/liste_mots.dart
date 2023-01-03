@@ -17,22 +17,20 @@ class ListeMots extends StatelessWidget {
                 children: [
                   IconButton(onPressed: (){
                     //TODO: Supprimer le mot de la base de données
-                    print("SUPPRIME");
+                    print("MOT SUPPRIME");
                   },
                     icon: Icon(Icons.delete_forever),
 
                   ),
                   IconButton(onPressed: (){
                     //TODO: Redéposer le mot sur la carte à l'emplacement de l'utilisateur
-                    print("DEPOSE");
+                    print("MOT DEPOSE");
                   },
                     icon: Icon(Icons.undo),
                   ),
                   ElevatedButton(onPressed: (){
                     Navigator.pop(context);
-                  }, child: Text('Déposer')),
-                  ElevatedButton(onPressed: (){},
-                      child: Text('Supprimer'))
+                  }, child: Text('Retour à la carte')),
                 ],
               ),
             ],
