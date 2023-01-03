@@ -6,7 +6,6 @@ import 'package:littlewords/home/liste_mots.dart';
 
 import 'home/splash_screen.dart';
 
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();  //test
   runApp(const ProviderScope(child: MyApp())
