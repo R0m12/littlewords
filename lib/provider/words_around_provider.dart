@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:littlewords/dio_provider.dart';
 import 'package:littlewords/dto/word_dto.dart';
-import 'package:littlewords/routes/device_Location.dart';
+import 'package:littlewords/provider/device_location_provider.dart';
 
 import '../dto/words_dto.dart';
 
