@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:littlewords/dto/word_dto.dart';
 
+import '../provider/words_around_provider.dart';
+
 class WordsAroundMarketLayer extends ConsumerWidget {
   const WordsAroundMarketLayer({Key? key}) : super(key: key);
 
@@ -15,13 +17,13 @@ class WordsAroundMarketLayer extends ConsumerWidget {
   }
 
   Widget _onData(List<WordDTO> words){
-    final List<Market> markers = <Marker>[];
+    final List<Marker> markers = <Marker>[];
     for (final WordDTO w in words){
       var wordPosition = LatLng(w.latitude!, w.longitude!);
       markers.add(Marker(
         point : wordPosition,
         builder : (context) {
-          return _WordMarkerContent(w);
+          return _WordMakerContent(w);
         }
       ));
     }
