@@ -6,11 +6,11 @@ part 'word_dto.g.dart';
 class WordDTO{
   WordDTO(this.uid, this.author, this.content, this.latitude, this.longitude);
 
-  final int? uid;
+  final int uid;
   final String? author;
   final String? content;
-  final String? latitude;
-  final String? longitude;
+  final double? latitude;
+  final double? longitude;
 
   Map<String, dynamic> toJson() => _$WordDTOToJson(this);
 
