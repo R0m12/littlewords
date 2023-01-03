@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:littlewords/home/home_view.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
 
-void main() {
-  runApp(SplashScreen());
-}
-
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Widget example1 = SplashScreenView(
+    return SplashScreenView(
       navigateRoute: const HomeView(),
       duration: 5000,
       imageSize: 130,
@@ -28,9 +24,5 @@ class SplashScreen extends StatelessWidget {
       backgroundColor: Colors.white,
     );
 
-    return MaterialApp(
-      title: 'Splash screen Demo',
-      home: example1,
-    );
   }
 }
