@@ -7,6 +7,7 @@ import 'package:littlewords/home/liste_mots.dart';
 
 import 'home/splash_screen.dart';
 
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();  //test
   runApp(const ProviderScope(child: MyApp())
@@ -25,6 +26,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: SplashScreen(),
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        '/liste': (context) => const ListeMots(),
+      },
     );
   }
 }
