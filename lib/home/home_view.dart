@@ -31,16 +31,6 @@ class HomeView extends StatelessWidget {
         ],
       ),
       body: LittleWordsMap(),
-
-      /*body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const <Widget>[
-
-              //LoginScreen(),
-            ],
-          ),
-        )*/
     );
   }
 }
