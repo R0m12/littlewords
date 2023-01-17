@@ -7,8 +7,8 @@ import 'package:littlewords/dto/word_dto.dart';
 
 import '../provider/words_around_provider.dart';
 
-class WordsAroundMarketLayer extends ConsumerWidget {
-  const WordsAroundMarketLayer({Key? key}) : super(key: key);
+class WordsAroundMarkerLayer extends ConsumerWidget {
+  const WordsAroundMarkerLayer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
