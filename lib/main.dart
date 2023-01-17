@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:littlewords/dto/create_word.dart';
 import 'package:littlewords/home/login_screen.dart';
 import 'package:littlewords/home/liste_mots.dart';
 
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (context) => const LoginScreen(),
         '/liste': (context) => const ListeMots(),
+        '/create': (context) => const CreateWords(),
       },
     );
   }

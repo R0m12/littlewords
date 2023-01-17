@@ -22,20 +22,22 @@ class ListeMots extends StatelessWidget {
             children: [
               Wrap(
                 children: [
-                  IconButton(onPressed: (){
-                    //TODO: Supprimer le mot de la base de données
-                    print("MOT SUPPRIME");
-                  },
-                    icon: Icon(Icons.delete_forever),
+                  //for (var unDeMesMots in listeDeMesMots) {
+                    IconButton(onPressed: () {
+                      //TODO: Supprimer le mot de la base de données
+                      //DbHelper.instance.delete(unDeMesMots);
+                      print("MOT SUPPRIME");
+                    },
+                      icon: Icon(Icons.delete_forever),
 
-                  ),
-                  IconButton(onPressed: (){
-                    //TODO: Redéposer le mot sur la carte à l'emplacement de l'utilisateur
-                    print("MOT DEPOSE");
-                  },
-                    icon: Icon(Icons.undo),
-                  ),
-
+                    ),
+                    IconButton(onPressed: () {
+                      //TODO: Redéposer le mot sur la carte à l'emplacement de l'utilisateur
+                      print("MOT DEPOSE");
+                    },
+                      icon: Icon(Icons.undo),
+                    ),
+                  //};
                 ],
               ),
               //Bouton permettant de revenir à la map
