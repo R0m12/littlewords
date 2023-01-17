@@ -54,6 +54,13 @@ class DbHelper{
     return db.execute(insertWord);
   }
 
+  /// Suppression d'un mot dans la base de données
+  Future<void> delete(final WordDTO wordDTO) async {
+    Database db = await instance.database;
+    final String deleteWord = "DELETE FROM words WHERE content = '${wordDTO.content}'";
+    return db.execute(deleteWord);
+  }
+
   /// Récupération de tous les mots de la base de données
   Future<List<WordDTO>> getAllWords() async {
     final Database db = await instance.database;
