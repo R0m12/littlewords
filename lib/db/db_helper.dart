@@ -8,78 +8,98 @@ class DbHelper{
   static const dbName = 'littlewords.db';
   static const dbPathName = 'littlewords.path';
   static const dbVersion = 1;
+  static const tableName = 'Words';
 
   //Instance de connexion à la db
   static Database? _database;
 
   //Definition d'un constructeur privé
-  DbHelper._privateConstructor();
+  //DbHelper._privateConstructor();
 
   //Création variable instance permettant d'obtenir un acces au singleton
-  static final DbHelper instance = DbHelper._privateConstructor();
+  //static final DbHelper instance = DbHelper._privateConstructor();
 
-  //Getter  de database avec init si necessaire
-  Future<Database> get database async => _database ??= await _init();
+  //Getter de database avec init si necessaire
+ // Future<Database> get database async => _database ??= await _init();
 
   //Initialisation de database
-  Future<Database> _init() async{
+ static init() async{
     final String dbPath = await getDatabasesPath();
+    final String path = dbPath + dbName;
 
     //On ouvre la connexion
-    return await openDatabase(
-      join(dbPath, dbPathName),
+    final Database maDatabase = await openDatabase(
+      path,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
       version: dbVersion,
     );
+    _database = maDatabase;
   }
 
   ///Déclenché lorsque la base de données n'existe pas sur le device
-  FutureOr<void> _onCreate(Database db, int version){
-    const String createWordsTableQuery = 'CREATE TABLE words (uid integer PRIMARY KEY AUTOINCREMENT, content VARCHAR(200) NOT NULL)';
+  static _onCreate(Database db, int version){
+    const String createWordsTableQuery = '''CREATE TABLE IF NOT EXISTS $tableName (
+        uid INTEGER PRIMARY KEY NOT NULL,
+        author VARCHAR NOT NULL,
+        content VARCHAR NOT NULL,
+        latitude REAL NULL,
+        longitude REAL NULL
+    )''';
     db.execute(createWordsTableQuery);
   }
 
   ///Déclenché lorsque le numéro de version est augmenté
-  FutureOr<void> _onUpgrade(Database db, int oldVersion, int newVersion){
-    const String dropWordsTableQuery = 'DROP TABLE IF EXISTS words';
+  static _onUpgrade(Database db, int oldVersion, int newVersion){
+    const String dropWordsTableQuery = 'DROP TABLE IF EXISTS $tableName';
     db.execute(dropWordsTableQuery);
   }
 
   /// Insertion d'un mot dans la base de données
-  Future<void> insert(final WordDTO wordDTO) async {
-    Database db = await instance.database;
-    final String insertWord = "INSERT into words (content, author, latitude, longitude) values ('${wordDTO.content}',"
-        "'${wordDTO.author}', '${wordDTO.latitude}', '${wordDTO.longitude}') ";
-    return db.execute(insertWord);
+  static void insert(WordDTO wordDTO) {
+    final Map<String, dynamic> mapDesMots = wordDTO.toJson();
+    _database!.insert(tableName, mapDesMots);
   }
 
   /// Suppression d'un mot dans la base de données
-  Future<void> delete(final WordDTO wordDTO) async {
-    Database db = await instance.database;
-    final String deleteWord = "DELETE FROM words WHERE content = '${wordDTO.content}'";
-    return db.execute(deleteWord);
+  //static Future<void> delete(WordDTO wordDTO) async {
+  static Future<void> delete(String uidWord) async {
+    //final String deleteWord = "DELETE FROM $tableName WHERE uid = ${uidWord}";
+    //_database!.delete(deleteWord);
+    await _database!.delete(tableName, where: 'uid = ?', whereArgs: [uidWord]);
   }
 
   /// Récupération de tous les mots de la base de données
-  Future<List<WordDTO>> getAllWords() async {
-    final Database db = await instance.database;
+  static Future<List<WordDTO>> getAllWords() async {
+    final List<Map<String, Object?>> resultSet = await _database!.query(tableName);
+    List<WordDTO> listeDeMesMots = List.generate(resultSet.length, (index) {
+      return WordDTO.fromJson(resultSet[index]);
+    });
 
-    final resultSet = await db.rawQuery("SELECT * from words");
-
-    final List<WordDTO> results = <WordDTO> [];
-
-    for(var r in resultSet){
-      var word = WordDTO.fromResultSet(r);
-      results.add(word);
+    if(listeDeMesMots.isEmpty){
+      return [];
     }
-    return Future.value(results);
+
+    // Convertir chaque ligne de resultSet en wordDTO.
+    //final List<WordDTO> words = [];
+    //for (var map in resultSet) {
+    //  var wordDTO = WordDTO.fromJson(map);
+    //  words.add(wordDTO);
+   // }
+    return listeDeMesMots;
+ //   final Database db = await instance.database;
+ //   final resultSet = await db.rawQuery("SELECT * FROM Words");
+//    final List<WordDTO> results = <WordDTO> [];
+ //   for(var r in resultSet){
+ //     var word = WordDTO.fromResultSet(r);
+ //     results.add(word);
+ //   }
+  //  return Future.value(results);
   }
 
   /// Récupére le nombre de mots présents dans la table
   Future<int> countWords() async {
-    final Database db = await instance.database;
-    var res = await db.rawQuery("Select count(*) from words");
+    var res = await _database!.rawQuery("SELECT COUNT(*) FROM Words");
     var count = Sqflite.firstIntValue(res);
     return Future.value(count);
   }

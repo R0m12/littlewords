@@ -33,27 +33,27 @@ class LittleWordsMap extends StatelessWidget {
       ),
 
         //TODO: Ajouter un marker pour indiquer la position de l'utilisateur
-        var currentLatitude;
-        var currentLongitude;
+        //var currentLatitude;
+        //var currentLongitude;
 
-        FlutterMap(
-          options: MapOptions(
-            center: LatLng(currentLatitude, currentLongitude),
-            zoom: 15.0,
-          ),
-          layers: [
-            TileLayerOptions(
-                urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                subdomains: ['a', 'b', 'c']
-            ),
-            MarkerLayerOptions(markers: _markers)
-          ],
-          mapController: _mapController,
-        )
+       // FlutterMap(
+       //   options: MapOptions(
+       //     center: LatLng(currentLatitude, currentLongitude),
+       //     zoom: 15.0,
+       //   ),
+       //   layers: [
+       //     TileLayerOptions(
+       //         urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+       //         subdomains: ['a', 'b', 'c']
+       //     ),
+       //     MarkerLayerOptions(markers: _markers)
+       //   ],
+       //   mapController: _mapController,
+       // )
 
 
         //TODO: Ajouter des markers sur les mots présentes aux alentours
-      ],
+      //],
     );
   }
 }

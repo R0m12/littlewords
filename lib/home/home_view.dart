@@ -1,32 +1,52 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:littlewords/routes/map.dart';
+import 'package:littlewords/home/liste_mots.dart';
+import '../dto/create_word.dart';
+import 'logout.dart';
 
-import 'login_screen.dart';
-
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
 
   @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+
+  int bottomNavigationIndex = 0;
+
+  @override
   Widget build(BuildContext context) {
+
+    final bodyPage = <Widget>[
+     const CreateWords(),
+      const ListeMots(),
+      const Logout(),
+    ];
+
     return Scaffold(
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Consumer(
-              builder: (BuildContext context, WidgetRef ref, Widget? child) {
-            return FloatingActionButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "/liste");
-              },
-              tooltip: 'Liste des mots',
-              child: const Icon(Icons.list_alt),
-            );
-          })
+      body: bodyPage[bottomNavigationIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: bottomNavigationIndex,
+        onTap: (int index) {
+          setState(() {
+            bottomNavigationIndex = index;
+          });
+        },
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_box_outlined),
+            label: 'Créer un mot',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.storage),
+            label: 'Liste des mots',
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.logout_rounded),
+            label: 'Deconnexion',
+          )
         ],
       ),
-      body: LittleWordsMap(),
     );
   }
 }
